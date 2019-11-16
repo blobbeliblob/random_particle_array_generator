@@ -57,6 +57,13 @@ filled_area = filled * total_area
 #list of particles to be generated and placed
 particles = []
 
+#list of the amount to be filled for each sieve size, used in statistics
+to_be_filled = []
+#list of the amount left unfilled for each sieve size, used in statistics
+left_unfilled = []
+#list of number of particles generated for each sieve size, used in statistics
+number_of_particles = []
+
 #returns true if a new particle p can be placed at coordinates (x, y)
 #point in polygon algorithm found at:
 #https://wrf.ecse.rpi.edu//Research/Short_Notes/pnpoly.html
@@ -100,12 +107,15 @@ if __name__=='__main__':
 	#generate the particles
 	print("\nGENERATING PARTICLES...\n")
 	for i in range(len(gradation) - 1):	#for each sieve size
-		area_to_be_filled = gradation[i][1] * filled_area
-		particle_size = random.random() * (gradation[i+1][0] - gradation[i][0]) + gradation[i][0]	#get a random particle size for the appropriate sieve size
+		area_to_be_filled = gradation[i][1] * filled_area	#the area that should be filled by particles of the current sieve size
+		to_be_filled.append([gradation[i][0], gradation[i][1] * filled_area])
+		left_unfilled.append([gradation[i][0], gradation[i][1] * filled_area])
+		number_of_particles.append([gradation[i][0], 0])
+		particle_size = random.random() * (gradation[i+1][0] - gradation[i][0]) + gradation[i][0]	#get a random particle size for the current sieve size
 		particle = Particle(min_radius, max_radius)	#create a new particle (polygon)
 		particle.scale(particle_size)	#scale the particle to the correct size
 		area = particle.get_area()	#get the area of the new particle
-		too_many_attempts = False
+		#too_many_attempts = False
 		while area < area_to_be_filled:
 			#keep generating (x, y) coordinates until they are valid for insertion,
 			#then insert the particle into the list of placed particles
@@ -126,6 +136,8 @@ if __name__=='__main__':
 			#	break
 			particles.append(particle)
 			area_to_be_filled -= area	#subtract the area of the placed particle from the area that needs to be filled
+			left_unfilled[i][1] -= area
+			number_of_particles[i][1] += 1
 			#generate the following particle
 			particle_size = random.random() * (gradation[i+1][0] - gradation[i][0]) + gradation[i][0]
 			particle = Particle(min_radius, max_radius)
@@ -158,13 +170,31 @@ if __name__=='__main__':
 			p_str += "\t" + str(p.get_area()) + "\n"
 		file.write(p_str)
 	file.close()
+	
+	#write statistics to file
+	file = open("statistics.txt", "w")
+	p_str = "Particles generated:\n"
+	p_sum = 0
+	for p in number_of_particles:
+		p_sum += p[1]
+		p_str += "\tSize:\t" + str(p[0]) + " mm\tNumber:\t" + str(p[1]) + "\n"
+	p_str += "Total number of particles:\t" + str(p_sum) + "\n\n"
+	file.write(p_str)
+	p_str = "Filled area:\n"
+	p_tot_unfilled = 0
+	for i in range(len(left_unfilled)):
+		p_tot_unfilled += left_unfilled[i][1]
+		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + "mm\tTo be filled:\t" + str(to_be_filled[i][1]) + "\tFilled:\t" + str(to_be_filled[i][1] - left_unfilled[i][1]) + "\tLeft unfilled:\t" + str(left_unfilled[i][1]) + "\n"
+	p_str += "Total area left unfilled:\t" + str(p_tot_unfilled) + "\n\n"
+	file.write(p_str)
+	file.close()
 
 	#plot results
 	print("PLOTTING RESULTS...\n")
 	if show_result or save_plotted_result:
 		Plot(particles, show_result, save_plotted_result, (x1, y1, x2, y2))
 
-#time it took to execute the complete script
+#time it took to execute the complete script, don't use if plotting results, as the program won't terminate before the image is closed
 #exec_time = time.time() - init_time
 #print("The program took " + str(exec_time) + " seconds to execute")
 
