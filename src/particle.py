@@ -21,7 +21,7 @@ class Particle():
 			self.max_distance = max_distance
 		#number of vertices in the particle
 		if not vertex_number or vertex_number < 4:
-			self.vertex_number = self.get_number_of_vertices()
+			self.vertex_number = self.get_number_of_vertices(30, 30)
 		else:
 			self.vertex_number = vertex_number
 		self.vertices = []	#this list contains all the vertices in the particle

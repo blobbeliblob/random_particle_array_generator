@@ -22,8 +22,8 @@ init_time = time.time()
 #gradation = [(10, 1), (20, 0)]
 #gradation = [(0.074, 0.05), (0.177, 0.10), (0.42, 0.225), (2.00, 0.19), (4.76, 0.265), (9.52, 0.10), (12.7, 0.00)]
 #gradation = [(2.0, 0.06), (3.15, 0.044), (4.0, 0.045), (5.0, 0.068), (6.3, 0.139), (8.0, 0.133), (10.0, 0.047), (12.5, 0.013), (14.0, 0)]
-gradation = [(5, 0.20), (10, 0.30), (30, 0.50), (50, 0.00)]
-#gradation = [(10, 1.0), (10.1, 0.00)]
+#gradation = [(5, 0.20), (10, 0.30), (30, 0.50), (50, 0.00)]
+gradation = [(10, 1.0), (10.1, 0.00)]
 
 #specimen boundaries
 #given as millimeters
@@ -31,7 +31,7 @@ x1, y1 = 0, 0
 x2, y2 = 100, 100
 
 #amount of specimen area that is filled with particles, given as fraction
-filled = 0.50
+filled = 0.30
 
 #minimum and maximum radius when generating vertices for the particles using polar coordinates
 min_radius = 1
@@ -106,7 +106,7 @@ if __name__=='__main__':
 
 	#generate the particles
 	print("\nGENERATING PARTICLES...\n")
-	for i in range(len(gradation) - 1):	#for each sieve size
+	for i in range(len(gradation) - 2, -1, -1):	#for each sieve size
 		area_to_be_filled = gradation[i][1] * filled_area	#the area that should be filled by particles of the current sieve size
 		to_be_filled.append([gradation[i][0], gradation[i][1] * filled_area])
 		left_unfilled.append([gradation[i][0], gradation[i][1] * filled_area])
@@ -170,7 +170,7 @@ if __name__=='__main__':
 			p_str += "\t" + str(p.get_area()) + "\n"
 		file.write(p_str)
 	file.close()
-	
+
 	#write statistics to file
 	file = open("statistics.txt", "w")
 	p_str = "Particles generated:\n"
