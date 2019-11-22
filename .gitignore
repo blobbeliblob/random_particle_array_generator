@@ -1,3 +1,7 @@
 
-
+# ignore the chache
 src/__pycache__/
+
+# ignore the local output
+src/statistics.txt
+src/values.txt
