@@ -66,6 +66,8 @@ to_be_filled = []
 left_unfilled = []
 #list of number of particles generated for each sieve size, used in statistics
 number_of_particles = []
+#number of particles that are of the wrong size, used in statistics
+wrong_size = 0
 
 #returns true if a new particle p can be placed at coordinates (x, y)
 #point in polygon algorithm found at:
@@ -111,9 +113,9 @@ if __name__=='__main__':
 	print("\nGENERATING PARTICLES...\n")
 	for i in range(len(gradation) - 2, -1, -1):	#for each sieve size
 		area_to_be_filled = gradation[i][1] * filled_area	#the area that should be filled by particles of the current sieve size
-		to_be_filled.append([gradation[i][0], gradation[i][1] * filled_area])
-		left_unfilled.append([gradation[i][0], gradation[i][1] * filled_area])
-		number_of_particles.append([gradation[i][0], 0])
+		to_be_filled.append([gradation[i][0], gradation[i][1] * filled_area])	#used in statistics
+		left_unfilled.append([gradation[i][0], gradation[i][1] * filled_area])	#used in statistics
+		number_of_particles.append([gradation[i][0], 0])	#used in statistics
 		particle_size = random.random() * (gradation[i+1][0] - gradation[i][0]) + gradation[i][0]	#get a random particle size for the current sieve size
 		particle = Particle(min_radius, max_radius, v_num)	#create a new particle (polygon)
 		particle.scale(particle_size)	#scale the particle to the correct size
@@ -130,8 +132,11 @@ if __name__=='__main__':
 				particle.set_position(x, y)
 			particles.append(particle)
 			area_to_be_filled -= area	#subtract the area of the placed particle from the area that needs to be filled
+			#used in statistics
 			left_unfilled[i][1] -= area
 			number_of_particles[i][1] += 1
+			if particle.get_width() < gradation[i][0] or particle.get_width() > gradation[i+1][0]:
+				wrong_size += 1
 			#generate the following particle
 			particle_size = random.random() * (gradation[i+1][0] - gradation[i][0]) + gradation[i][0]
 			particle = Particle(min_radius, max_radius, v_num)
@@ -180,6 +185,8 @@ if __name__=='__main__':
 		p_tot_unfilled += left_unfilled[i][1]
 		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + "mm\tTo be filled:\t" + str(to_be_filled[i][1]) + "\tFilled:\t" + str(to_be_filled[i][1] - left_unfilled[i][1]) + "\tLeft unfilled:\t" + str(left_unfilled[i][1]) + "\n"
 	p_str += "Total area left unfilled:\t" + str(p_tot_unfilled) + "\n\n"
+	file.write(p_str)
+	p_str = "Particles not within the right sieve size:\t" + str(wrong_size) + "\n\n"
 	file.write(p_str)
 	file.close()
 
