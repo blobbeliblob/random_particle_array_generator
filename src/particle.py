@@ -21,7 +21,7 @@ class Particle():
 			self.max_distance = max_distance
 		#number of vertices in the particle
 		if not vertex_number or vertex_number < 4:
-			self.vertex_number = self.get_number_of_vertices(30, 30)
+			self.vertex_number = self.get_number_of_vertices()
 		else:
 			self.vertex_number = vertex_number
 		self.vertices = []	#this list contains all the vertices in the particle
@@ -134,6 +134,13 @@ class Particle():
 
 	#normalize the size of the particle to facilitate scaling, this methods sets the width to 1
 	def normalize(self):
+		#get the width of the particle
+		particle_width = self.get_width()
+		#scale the particle so that the size of the width is equal to 1
+		self.scale(1 / particle_width)
+
+	#get the width of the particle
+	def get_width(self):
 		#for every vertex in the polygon, create a line to each of the other vertices
 		#for each line, rotate the polygon along the line, and calculate the width and height of the excribed rectangle
 		#then, choose the minimum value as the width of the particle
@@ -155,8 +162,7 @@ class Particle():
 				if particle_width > dimensions[1]:
 					particle_width = dimensions[1]
 				k = k + 1 if k != len(temp) - 1 else 0
-		#scale the particle so that the size of the width is equal to 1
-		self.scale(1 / particle_width)
+		return particle_width
 
 	#rotate the particle, angle is in degrees
 	#method used: https://stackoverflow.com/questions/12161277/how-to-rotate-a-vertex-around-a-certain-point

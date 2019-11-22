@@ -37,6 +37,9 @@ filled = 0.30
 min_radius = 1
 max_radius = 1
 
+#number of vertices in the generated particles, leave as None for randomized
+v_num = 30
+
 #what contents should be written to the file
 write_labels = True
 write_center = True
@@ -112,35 +115,26 @@ if __name__=='__main__':
 		left_unfilled.append([gradation[i][0], gradation[i][1] * filled_area])
 		number_of_particles.append([gradation[i][0], 0])
 		particle_size = random.random() * (gradation[i+1][0] - gradation[i][0]) + gradation[i][0]	#get a random particle size for the current sieve size
-		particle = Particle(min_radius, max_radius)	#create a new particle (polygon)
+		particle = Particle(min_radius, max_radius, v_num)	#create a new particle (polygon)
 		particle.scale(particle_size)	#scale the particle to the correct size
 		area = particle.get_area()	#get the area of the new particle
-		#too_many_attempts = False
 		while area < area_to_be_filled:
 			#keep generating (x, y) coordinates until they are valid for insertion,
 			#then insert the particle into the list of placed particles
-			#failed_attempts = 0
 			x = random.random() * (x2 - x1) + x1
 			y = random.random() * (y2 - y1) + y1
 			particle.set_position(x, y)
 			while not check_insert_point(particle):
-			#	failed_attempts += 1
-			#	if failed_attempts >= 100000:
-			#		print("too many attempts\n")
-			#		too_many_attempts = True
-			#		break
 				x = random.random() * (x2 - x1) + x1
 				y = random.random() * (y2 - y1) + y1
 				particle.set_position(x, y)
-			#if too_many_attempts:
-			#	break
 			particles.append(particle)
 			area_to_be_filled -= area	#subtract the area of the placed particle from the area that needs to be filled
 			left_unfilled[i][1] -= area
 			number_of_particles[i][1] += 1
 			#generate the following particle
 			particle_size = random.random() * (gradation[i+1][0] - gradation[i][0]) + gradation[i][0]
-			particle = Particle(min_radius, max_radius)
+			particle = Particle(min_radius, max_radius, v_num)
 			particle.scale(particle_size)
 			area = particle.get_area()
 
