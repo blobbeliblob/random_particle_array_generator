@@ -1,4 +1,5 @@
-#this is a test
+#this script generates a random aggregate microstructure
+#the particles are represented as polygons
 
 import random
 import time
@@ -17,7 +18,7 @@ init_time = time.time()
 #elements take the shape: (sieve size, mass % that that is caught by the sieve),
 #last element should be the maximum sieve size (meaning no particles caught in that sieve)
 #size given in millimeters
-#mass % given as fraction
+#mass % given as fraction, total of all sieve sizes mass % should add up to 1 (i.e. 100 %)
 #gradation = [(1, 0.45), (5, 0.35), (10, 0.20), (20, 0)]
 #gradation = [(10, 1), (20, 0)]
 #gradation = [(0.074, 0.05), (0.177, 0.10), (0.42, 0.225), (2.00, 0.19), (4.76, 0.265), (9.52, 0.10), (12.7, 0.00)]
@@ -45,6 +46,8 @@ write_labels = True
 write_center = True
 write_vertices = True
 write_area = True
+write_width = True
+write_longest_distance = True
 #should the result be displayed and saved as a plot
 show_result = True
 save_plotted_result = False
@@ -157,34 +160,47 @@ if __name__=='__main__':
 		if write_center:
 			if write_labels:
 				p_str += "\t*** Center ***\n\t"
-			p_str += str(p.get_position()) + "\n"
+			p_str += str(p.get_position()[0]) + ", " + str(p.get_position()[1]) + "\n"
 		if write_vertices:
 			if write_labels:
 				p_str += "\t*** Vertices ***\n"
 			for v in p.get_vertices():
-				p_str += "\t" + str(v) + "\n"
+				p_str += "\t" + str(v[0]) + ", " + str(v[1]) + "\n"
 		if write_area:
 			if write_labels:
 				p_str += "\t*** Area ***\n"
 			p_str += "\t" + str(p.get_area()) + "\n"
+		if write_width:
+			if write_labels:
+				p_str += "\t*** Width ***\n"
+			p_str += "\t" + str(p.get_width()) + "\n"
+		if write_longest_distance:
+			if write_labels:
+				p_str += "\t*** Longest distance from center to vertex ***\n"
+			p_str += "\t" + str(p.get_longest_distance()) + "\n"
 		file.write(p_str)
 	file.close()
 
 	#write statistics to file
 	file = open("statistics.txt", "w")
+	p_str = "Time to execute:\t" + str(exec_time) + " seconds\n\n"
+	file.write(p_str)
 	p_str = "Particles generated:\n"
 	p_sum = 0
 	for p in number_of_particles:
 		p_sum += p[1]
-		p_str += "\tSize:\t" + str(p[0]) + " mm\tNumber:\t" + str(p[1]) + "\n"
+		p_str += "\tSize:\t" + str(p[0]) + " mm\tNumber:\t" + str(p[1]) + "\n\n"
 	p_str += "Total number of particles:\t" + str(p_sum) + "\n\n"
 	file.write(p_str)
 	p_str = "Filled area:\n"
 	p_tot_unfilled = 0
 	for i in range(len(left_unfilled)):
 		p_tot_unfilled += left_unfilled[i][1]
-		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + "mm\tTo be filled:\t" + str(to_be_filled[i][1]) + "\tFilled:\t" + str(to_be_filled[i][1] - left_unfilled[i][1]) + "\tLeft unfilled:\t" + str(left_unfilled[i][1]) + "\n"
+		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + " mm\tTo be filled:\t" + str(to_be_filled[i][1]) + "\tFilled:\t" + str(to_be_filled[i][1] - left_unfilled[i][1]) + "\tLeft unfilled:\t" + str(left_unfilled[i][1]) + "\n\n"
 	p_str += "Total area left unfilled:\t" + str(p_tot_unfilled) + "\n\n"
+	file.write(p_str)
+	p_str = "Target fraction of area filled:\t" + str(filled) + "\n"
+	p_str += "Output fraction of area filled:\t" + str((filled_area-p_tot_unfilled)/total_area) + "\n\n"
 	file.write(p_str)
 	p_str = "Particles not within the right sieve size:\t" + str(wrong_size) + "\n\n"
 	file.write(p_str)
