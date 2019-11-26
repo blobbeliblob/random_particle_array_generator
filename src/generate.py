@@ -23,23 +23,23 @@ init_time = time.time()
 #gradation = [(10, 1), (20, 0)]
 #gradation = [(0.074, 0.05), (0.177, 0.10), (0.42, 0.225), (2.00, 0.19), (4.76, 0.265), (9.52, 0.10), (12.7, 0.00)]
 #gradation = [(2.0, 0.06), (3.15, 0.044), (4.0, 0.045), (5.0, 0.068), (6.3, 0.139), (8.0, 0.133), (10.0, 0.047), (12.5, 0.013), (14.0, 0)]
-#gradation = [(5, 0.20), (10, 0.30), (30, 0.50), (50, 0.00)]
-gradation = [(10, 1.0), (10.1, 0.00)]
+gradation = [(5, 0.20), (10, 0.30), (30, 0.50), (50, 0.00)]
+#gradation = [(10, 1.0), (10.1, 0.00)]
 
 #specimen boundaries
 #given as millimeters
 x1, y1 = 0, 0
-x2, y2 = 100, 100
+x2, y2 = 300, 300
 
 #amount of specimen area that is filled with particles, given as fraction
-filled = 0.30
+filled = 0.55
 
 #minimum and maximum radius when generating vertices for the particles using polar coordinates
 min_radius = 1
-max_radius = 1
+max_radius = 1.5
 
 #number of vertices in the generated particles, leave as None for randomized
-v_num = 30
+v_num = None
 
 #what contents should be written to the file
 write_labels = True
@@ -136,8 +136,8 @@ if __name__=='__main__':
 			particles.append(particle)
 			area_to_be_filled -= area	#subtract the area of the placed particle from the area that needs to be filled
 			#used in statistics
-			left_unfilled[i][1] -= area
-			number_of_particles[i][1] += 1
+			left_unfilled[len(gradation)-2-i][1] -= area
+			number_of_particles[len(gradation)-2-i][1] += 1
 			if particle.get_width() < gradation[i][0] or particle.get_width() > gradation[i+1][0]:
 				wrong_size += 1
 			#generate the following particle
@@ -189,20 +189,25 @@ if __name__=='__main__':
 	p_sum = 0
 	for p in number_of_particles:
 		p_sum += p[1]
-		p_str += "\tSize:\t" + str(p[0]) + " mm\tNumber:\t" + str(p[1]) + "\n\n"
-	p_str += "Total number of particles:\t" + str(p_sum) + "\n\n"
+	for p in number_of_particles:
+		p_str += "\tSize:\t" + str(p[0]) + " mm\tNumber:\t" + str(p[1]) + "\tPercentage:\t" + str(p[1]/p_sum*100) + "\n"
+	p_str += "\nTotal number of particles:\t" + str(p_sum) + "\n\n"
 	file.write(p_str)
 	p_str = "Filled area:\n"
 	p_tot_unfilled = 0
 	for i in range(len(left_unfilled)):
 		p_tot_unfilled += left_unfilled[i][1]
-		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + " mm\tTo be filled:\t" + str(to_be_filled[i][1]) + "\tFilled:\t" + str(to_be_filled[i][1] - left_unfilled[i][1]) + "\tLeft unfilled:\t" + str(left_unfilled[i][1]) + "\n\n"
-	p_str += "Total area left unfilled:\t" + str(p_tot_unfilled) + "\n\n"
+		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + " mm\tTo be filled:\t" + str(to_be_filled[i][1]) + "\tFilled:\t" + str(to_be_filled[i][1] - left_unfilled[i][1]) + "\tLeft unfilled:\t" + str(left_unfilled[i][1]) + "\n"
+	p_str += "\nTotal area left unfilled:\t" + str(p_tot_unfilled) + "\n\n"
 	file.write(p_str)
 	p_str = "Target fraction of area filled:\t" + str(filled) + "\n"
 	p_str += "Output fraction of area filled:\t" + str((filled_area-p_tot_unfilled)/total_area) + "\n\n"
 	file.write(p_str)
-	p_str = "Particles not within the right sieve size:\t" + str(wrong_size) + "\n\n"
+	p_str = "Output gradation:\n"
+	for i in range(len(left_unfilled)):
+		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + "\tPercentage:\t" + str((to_be_filled[i][1] - left_unfilled[i][1])/(filled_area-p_tot_unfilled)) + "\n"
+	file.write(p_str)
+	p_str = "\nParticles not within the right sieve size:\t" + str(wrong_size) + "\n\n"
 	file.write(p_str)
 	file.close()
 

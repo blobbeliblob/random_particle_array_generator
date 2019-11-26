@@ -9,7 +9,6 @@ import numpy as np
 #save_plot = boolean
 #boundaries = defines the boundaries of the plotting area as a rectangle, (x1, y1, x2, y2)
 def Plot(particles, show_plot, save_plot, boundaries=None):
-	#plt.title('Particles')
 	fig, ax = plt.subplots()
 	if boundaries:
 		x1, y1, x2, y2 = boundaries

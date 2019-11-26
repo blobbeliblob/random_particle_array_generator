@@ -162,7 +162,7 @@ class Particle():
 				if particle_width > dimensions[1]:
 					particle_width = dimensions[1]
 				k = k + 1 if k != len(temp) - 1 else 0
-		return particle_width
+		return particle_width * 2
 
 	#rotate the particle, angle is in degrees
 	#method used: https://stackoverflow.com/questions/12161277/how-to-rotate-a-vertex-around-a-certain-point
