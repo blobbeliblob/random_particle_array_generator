@@ -27,7 +27,7 @@ def Plot(particles, show_plot, save_plot, boundaries=None):
 		line_x = [p.vertices[len(p.vertices)-1][0], p.vertices[0][0]]
 		line_y = [p.vertices[len(p.vertices)-1][1], p.vertices[0][1]]
 		ax.plot(line_x, line_y, color='r', linewidth=0.5)
-	if show_plot:
-		plt.show()
 	if save_plot:
 		plt.savefig("particles.png")
+	if show_plot:
+		plt.show()

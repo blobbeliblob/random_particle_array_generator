@@ -50,7 +50,7 @@ write_width = True
 write_longest_distance = True
 #should the result be displayed and saved as a plot
 show_result = True
-save_plotted_result = False
+save_plotted_result = True
 
 #######################
 #	MAIN PROGRAM
