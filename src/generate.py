@@ -214,7 +214,7 @@ if __name__=='__main__':
 	file.write(p_str)
 	p_str = "Output gradation:\n"
 	for i in range(len(left_unfilled)):
-		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + "\tPercentage:\t" + str((to_be_filled[i][1] - left_unfilled[i][1])/(filled_area-p_tot_unfilled)) + "\n"
+		p_str += "\tSize:\t" + str(left_unfilled[i][0]) + " mm\tPercentage:\t" + str((to_be_filled[i][1] - left_unfilled[i][1])/(filled_area-p_tot_unfilled)) + "\n"
 	file.write(p_str)
 	p_str = "\nParticles not within the right sieve size:\t" + str(wrong_size) + "\n\n"
 	file.write(p_str)
