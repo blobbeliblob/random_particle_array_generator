@@ -15,9 +15,11 @@ Once Python is installed, the following libraries need to be installed:
 
 If Python has been added to the system's path, the libraries can be installed by running the included install_requirements.bat file (on Windows) or by manually running the following commands in the terminal:
 
-* pip install numpy
-* pip install matplotlib
-* pip install shapely
+```pip install numpy```
+
+```pip install matplotlib```
+
+```pip install shapely```
 
 Shapely is also included in the /packages folder, and can be installed by running:
 
@@ -45,7 +47,7 @@ To generate a random particle array, run the _generate.py_ script. The script ge
 
 ### Modifying parameters
 
-The following parameters can be edited in the generate.py file to modify the output, the parameters are located under the "USER INPUT" section:
+The following parameters can be edited in the _generate.py_ file to modify the output, the parameters are located under the "USER INPUT" section:
 * gradation
 	* A list containing information on the gradation to be used. Each element is a list, where the first element should be the size of the sieve (given in millimeters) and the second element should be the passing percentage of mass.
 * x1, y1, x2, y2
