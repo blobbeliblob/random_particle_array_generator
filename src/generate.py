@@ -52,6 +52,9 @@ write_longest_distance = True
 show_result = True
 save_plotted_result = True
 
+#display the progress when the program is running
+debug = True
+
 #######################
 #	MAIN PROGRAM
 #######################
@@ -135,6 +138,8 @@ if __name__=='__main__':
 				particle.set_position(x, y)
 			particles.append(particle)
 			area_to_be_filled -= area	#subtract the area of the placed particle from the area that needs to be filled
+			if debug:
+				print('Size: ' + str(gradation[i][0]) + 'mm\tProgress:' + str(int(to_be_filled[len(gradation)-2-i][1]-left_unfilled[len(gradation)-2-i][1])) + ' / ' + str(int(to_be_filled[len(gradation)-2-i][1])) + '\tParticles: ' + str(number_of_particles[len(gradation)-2-i][1]), end='\r')
 			#used in statistics
 			left_unfilled[len(gradation)-2-i][1] -= area
 			number_of_particles[len(gradation)-2-i][1] += 1
@@ -145,10 +150,13 @@ if __name__=='__main__':
 			particle = Particle(min_radius, max_radius, v_num)
 			particle.scale(particle_size)
 			area = particle.get_area()
+		if debug:
+			print('Size: ' + str(gradation[i][0]) + 'mm\tProgress:' + str(int(to_be_filled[len(gradation)-2-i][1]-left_unfilled[len(gradation)-2-i][1])) + ' / ' + str(int(to_be_filled[len(gradation)-2-i][1])) + '\tParticles: ' + str(number_of_particles[len(gradation)-2-i][1]))
 
 	#time it took to execute the generation of the particles
 	exec_time = time.time() - init_time
-	print("Generating the particles took " + str(exec_time) + " seconds\n")
+	if debug:
+		print("\nGenerating the particles took " + str(exec_time) + " seconds\n")
 
 	#write particles to file
 	print("WRITING TO FILE...\n")
