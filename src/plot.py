@@ -2,6 +2,8 @@
 #this plots the particle objects
 
 import matplotlib.pyplot as plt
+from matplotlib.patches import Polygon
+from matplotlib.collections import PatchCollection
 import numpy as np
 
 #particles = list of Particle objects
@@ -10,23 +12,23 @@ import numpy as np
 #boundaries = defines the boundaries of the plotting area as a rectangle, (x1, y1, x2, y2)
 def Plot(particles, show_plot, save_plot, boundaries=None):
 	fig, ax = plt.subplots()
+	shapes = []
 	if boundaries:
 		x1, y1, x2, y2 = boundaries
-		ax.plot([x1, x2], [y1, y1], color='b')
-		ax.plot([x1, x2], [y2, y2], color='b')
-		ax.plot([x1, x1], [y1, y2], color='b')
-		ax.plot([x2, x2], [y1, y2], color='b')
+		ax.plot([x1, x2], [y1, y1], color='k')
+		ax.plot([x1, x2], [y2, y2], color='k')
+		ax.plot([x1, x1], [y1, y2], color='k')
+		ax.plot([x2, x2], [y1, y2], color='k')
 	for p in particles:
-		#x, y = p.get_position()
-		#center = plt.Circle((x, y), .05, color='r')
-		#plt.gcf().gca().add_artist(center)
-		for i in range(len(p.vertices) - 1):
-			line_x = [p.vertices[i][0], p.vertices[i+1][0]]
-			line_y = [p.vertices[i][1], p.vertices[i+1][1]]
-			ax.plot(line_x, line_y, color='r', linewidth=0.5)
-		line_x = [p.vertices[len(p.vertices)-1][0], p.vertices[0][0]]
-		line_y = [p.vertices[len(p.vertices)-1][1], p.vertices[0][1]]
-		ax.plot(line_x, line_y, color='r', linewidth=0.5)
+		v = np.array(p.get_vertices())
+		polygon = Polygon(v, True)
+		shapes.append(polygon)
+	p_col = PatchCollection(shapes)
+	p_col.set_color([0.3, 0.3, 0.3])	#color of the particles
+	ax.set_facecolor([1, 1, 1])	#color of the figure
+	fig.patch.set_facecolor([1, 1, 1])	#color around the figure
+	ax.add_collection(p_col)
+	ax.set_aspect('equal')
 	if save_plot:
 		plt.savefig("particles.png")
 	if show_plot:
