@@ -5,24 +5,28 @@
 ### 2. Install requirements
 
 The code requires you to have Python 3 installed,
-which can be downloaded from https://www.python.org/downloads/
-<br><br>
+which can be downloaded from https://www.python.org/downloads/.
+<br>
 Once Python is installed, the following libraries need to be installed:
+
 * numpy (https://numpy.org/)
 * matplotlib (https://matplotlib.org/users/installing.html)
 * shapely (https://pypi.org/project/Shapely/)
-<br>
+
 If Python has been added to the system's path, the libraries can be installed by running the included install_requirements.bat file (on Windows) or by manually running the following commands in the terminal:
+
 * pip install numpy
 * pip install matplotlib
 * pip install shapely
-<br>
+
 Shapely is also included in the /packages folder, and can be installed by running:
+
 * pip install Shapely-1.6.4.post2-cp36-cp36m-win_amd64.whl
-<br>
+
 from the terminal.
 <br><br>
 The required libraries can also be installed using a package manager, included in for example:
+
 * Canopy (https://assets.enthought.com/downloads/)
 * Anaconda (https://www.anaconda.com/distribution/)
 
@@ -31,12 +35,12 @@ The required libraries can also be installed using a package manager, included i
 
 ### Running the code
 
-To generate a random particle array, run the generate.py script. The script generates the following files:
-* values.txt
+To generate a random particle array, run the _generate.py_ script. The script generates the following files:
+* _values.txt_
 	* This file includes data on the individual particles
-* statistics.txt
+* _statistics.txt_
 	* This file includes general information on the generated particle array
-* particles.png
+* _particles.png_
 	* This file visualizes the generated particle array
 
 ### Modifying parameters
