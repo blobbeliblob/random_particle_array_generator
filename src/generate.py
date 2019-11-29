@@ -15,16 +15,10 @@ init_time = time.time()
 #######################
 
 #list of tuples representing gradation,
-#elements take the shape: (sieve size, mass % that that is caught by the sieve),
-#last element should be the maximum sieve size (meaning no particles caught in that sieve)
-#size given in millimeters
-#mass % given as fraction, total of all sieve sizes mass % should add up to 1 (i.e. 100 %)
-#gradation = [(1, 0.45), (5, 0.35), (10, 0.20), (20, 0)]
-#gradation = [(10, 1), (20, 0)]
-#gradation = [(0.074, 0.05), (0.177, 0.10), (0.42, 0.225), (2.00, 0.19), (4.76, 0.265), (9.52, 0.10), (12.7, 0.00)]
-#gradation = [(2.0, 0.06), (3.15, 0.044), (4.0, 0.045), (5.0, 0.068), (6.3, 0.139), (8.0, 0.133), (10.0, 0.047), (12.5, 0.013), (14.0, 0)]
-gradation = [(5, 0.20), (10, 0.30), (30, 0.50), (50, 0.00)]
-#gradation = [(10, 1.0), (10.1, 0.00)]
+#elements take the shape: [sieve size, passing %],
+#sieve size given in millimeters
+#passing % given as fraction
+gradation = [[50, 1.00], [30, 0.50], [10, 0.20], [5, 0.00]]
 
 #specimen boundaries
 #given as millimeters
@@ -58,6 +52,13 @@ debug = True
 #######################
 #	MAIN PROGRAM
 #######################
+
+#convert the gradation to be a list of percentage retained
+temp_var_a = 0
+for i in range(len(gradation)):
+	gradation[i][1] = 1.00 - gradation[i][1] - temp_var_a
+	temp_var_a += gradation[i][1]
+gradation = gradation[::-1]	#reverse the list
 
 #area of the specimen and area filled with particles
 total_area = (x2 - x1) * (y2 - y1)
