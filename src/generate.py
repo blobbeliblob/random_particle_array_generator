@@ -1,5 +1,4 @@
-#this script generates a random aggregate microstructure
-#the particles are represented as polygons
+#Author: Camilo Hernández
 
 import random
 import time

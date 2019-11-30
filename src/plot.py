@@ -1,5 +1,4 @@
-
-#this plots the particle objects
+#Author: Camilo Hernández
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
