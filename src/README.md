@@ -13,7 +13,7 @@ Once Python is installed, the following libraries need to be installed:
 * matplotlib (https://matplotlib.org/users/installing.html)
 * shapely (https://pypi.org/project/Shapely/)
 
-If Python has been added to the system's path, the libraries can be installed by running the included install_requirements.bat file (on Windows) or by manually running the following commands in the terminal:
+If Python has been added to the system's path, the libraries can be installed by running the included _install_requirements.bat_ file (on Windows) or by manually running the following commands in the terminal:
 
 `pip install numpy`
 
