@@ -18,6 +18,7 @@ init_time = time.time()
 #sieve size given in millimeters
 #passing % given as fraction
 gradation = [[50, 1.00], [30, 0.50], [10, 0.20], [5, 0.00]]
+#gradation = [[19, 1.00], [12.5, 0.987], [9.5, 0.865], [4.75, 0.718], [2.36, 0.514], [1.18, 0.361], [0.6, 0.255], [0.3, 0.147], [0.15, 0.077], [0.075, 0.054]]
 
 #specimen boundaries
 #given as millimeters
@@ -76,11 +77,6 @@ number_of_particles = []
 wrong_size = 0
 
 #returns true if a new particle p can be placed at coordinates (x, y)
-#point in polygon algorithm found at:
-#https://wrf.ecse.rpi.edu//Research/Short_Notes/pnpoly.html
-#http://erich.realtimerendering.com/ptinpoly/
-#shapely found at:
-#https://github.com/Toblerity/Shapely
 def check_insert_point(p):
 	#check if the new particle is fully inside the specimen
 	for v in p.get_vertices():

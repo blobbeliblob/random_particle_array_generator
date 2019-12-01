@@ -84,7 +84,6 @@ class Particle():
 		return self.vertices
 
 	#calculates and returns the area of the particle
-	#method used: https://en.wikipedia.org/wiki/Shoelace_formula
 	def get_area(self):
 		x_val = 0
 		y_val = 0
@@ -103,7 +102,6 @@ class Particle():
 			v[1] =v[1] * multiplier
 
 	#calculates a new origin from the vertices
-	#method used: https://en.wikipedia.org/wiki/Centroid#Of_a_polygon
 	def calculate_new_center(self):
 		area = self.get_area()
 		x, y = 0, 0
@@ -166,7 +164,6 @@ class Particle():
 		return particle_width * 2
 
 	#rotate the particle, angle is in degrees
-	#method used: https://stackoverflow.com/questions/12161277/how-to-rotate-a-vertex-around-a-certain-point
 	def rotate(self, angle):
 		for v in self.vertices:
 			v[0] = self.x + (v[0] - self.x) * cos(radians(angle)) - (v[1] - self.y) * sin(radians(angle))
