@@ -17,8 +17,15 @@ init_time = time.time()
 #elements take the shape: [sieve size, passing %],
 #sieve size given in millimeters
 #passing % given as fraction
-gradation = [[50, 1.00], [30, 0.50], [10, 0.20], [5, 0.00]]
+
+#gradation used for testing
+#gradation = [[50, 1.00], [30, 0.50], [10, 0.20], [5, 0.00]]
+
+#full real gradation
 #gradation = [[19, 1.00], [12.5, 0.987], [9.5, 0.865], [4.75, 0.718], [2.36, 0.514], [1.18, 0.361], [0.6, 0.255], [0.3, 0.147], [0.15, 0.077], [0.075, 0.054]]
+
+#simpler real gradation
+gradation = [[19, 1.00], [12.5, 0.987], [9.5, 0.865], [4.75, 0.718], [2.36, 0.514]]
 
 #specimen boundaries
 #given as millimeters
@@ -26,11 +33,11 @@ x1, y1 = 0, 0
 x2, y2 = 300, 300
 
 #amount of specimen area that is filled with particles, given as fraction
-filled = 0.55
+filled = 0.50
 
 #minimum and maximum radius when generating vertices for the particles using polar coordinates
 min_radius = 1
-max_radius = 1.5
+max_radius = 1.25
 
 #number of vertices in the generated particles, leave as None for randomized
 v_num = None

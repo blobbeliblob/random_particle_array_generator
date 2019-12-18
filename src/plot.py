@@ -5,6 +5,9 @@ from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 import numpy as np
 
+#define the dpi / detail level of the plot
+resolution = 1000
+
 #particles = list of Particle objects
 #show_plot = boolean
 #save_plot = boolean
@@ -29,6 +32,6 @@ def Plot(particles, show_plot, save_plot, boundaries=None):
 	ax.add_collection(p_col)
 	ax.set_aspect('equal')
 	if save_plot:
-		plt.savefig("particles.png")
+		plt.savefig("particles.png", dpi=resolution)
 	if show_plot:
 		plt.show()
