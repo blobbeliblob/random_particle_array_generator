@@ -1,13 +1,20 @@
-#Author: Camilo Hernández
+#Author: Camilo Hernandez
 
 import random
 import time
 from particle import Particle
 from plot import Plot
 from shapely.geometry import Polygon
+import sys
 
 #initialize timer
 init_time = time.time()
+
+#overrides the normal print
+#used for printing to the terminal
+def print(str, end='\n'):
+	sys.stdout.write(str + end)
+	sys.stdout.flush()
 
 #######################
 #	USER INPUT

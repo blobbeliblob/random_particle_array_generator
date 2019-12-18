@@ -1,4 +1,4 @@
-#Author: Camilo Hernández
+#Author: Camilo Hernandez
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon

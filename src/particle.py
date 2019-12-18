@@ -1,4 +1,4 @@
-#Author: Camilo Hernández
+#Author: Camilo Hernandez
 
 import random
 from math import sin, cos, radians, sqrt, atan2, acos
