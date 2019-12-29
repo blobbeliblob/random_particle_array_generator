@@ -117,7 +117,7 @@ def check_insert_point(p):
 					i = i + 1
 				if c:
 					return False
-	#check intersection polygon intersection using the shapely library
+	#check polygon intersection using the shapely library
 	polygon_1 = Polygon(p.get_vertices())
 	for particle in particles:
 		polygon_2 = Polygon(particle.get_vertices())
