@@ -7,6 +7,14 @@ import sys
 import os
 import time
 
+#overrides the normal print
+#used for printing to the terminal
+'''
+def print(str, end='\n'):
+	sys.stdout.write(str + end)
+	sys.stdout.flush()
+'''
+
 #main program
 if __name__=='__main__':
 
@@ -28,7 +36,7 @@ if __name__=='__main__':
 	boundaries = (x1, y1, x2, y2)
 
 	# amount of specimen area that is filled with particles, given as fraction
-	aggregate_fraction = 0.65
+	aggregate_fraction = 0.50
 
 	# minimum and maximum radius when generating vertices for the particles using polar coordinates
 	min_radius = 1
