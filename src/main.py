@@ -93,13 +93,16 @@ if __name__=='__main__':
 	#	SAVE RESULTS
 	#######################
 
+	if not os.path.exists("results"):
+		os.makedirs("results")
+
 	if res:
 		# save results
 		print("WRITING TO FILE...\n")
 
 		# write particles to readable file
 		try:
-			file = open("values.txt", "w")
+			file = open("results/values.txt", "w")
 			gen.write_particles_to_file(file)
 			file.close()
 		except Exception as e:
@@ -107,7 +110,7 @@ if __name__=='__main__':
 
 		# write particle centers to file
 		try:
-			file = open("centers.txt", "w")
+			file = open("results/centers.txt", "w")
 			gen.write_centers_to_file(file)
 			file.close()
 		except Exception as e:
@@ -115,7 +118,7 @@ if __name__=='__main__':
 
 		# write particle vertices to file
 		try:
-			file = open("vertices.txt", "w")
+			file = open("results/vertices.txt", "w")
 			gen.write_vertices_to_file(file)
 			file.close()
 		except Exception as e:
@@ -123,7 +126,7 @@ if __name__=='__main__':
 
 		# write statistics to file
 		try:
-			file = open("statistics.txt", "w")
+			file = open("results/statistics.txt", "w")
 			gen.write_statistics_to_file(file)
 			file.close()
 		except Exception as e:
@@ -132,7 +135,7 @@ if __name__=='__main__':
 		if debug:
 			try:
 				pathname = os.path.dirname(sys.argv[0])
-				print("Results saved to:\n" + os.path.abspath(pathname) + "\n")
+				print("Results saved to:\n" + os.path.abspath(pathname) + "\\results" + "\n")
 			except Exception as e:
 				print("Could not print path of saved results!\n")
 

@@ -32,6 +32,6 @@ def Plot(particles, show_plot, save_plot, boundaries=None):
 	ax.add_collection(p_col)
 	ax.set_aspect('equal')
 	if save_plot:
-		plt.savefig("particles.png", dpi=resolution)
+		plt.savefig("results/particles.png", dpi=resolution)
 	if show_plot:
 		plt.show()
