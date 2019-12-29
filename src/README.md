@@ -7,6 +7,8 @@
 The code requires you to have Python 3 installed,
 which can be downloaded from https://www.python.org/downloads/.
 <br>
+_Note! The Shapely library appears to only work with Python 3.6_
+<br>
 Once Python is installed, the following libraries need to be installed:
 
 * numpy (https://numpy.org/)
