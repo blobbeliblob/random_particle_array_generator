@@ -6,15 +6,18 @@ from particle import Particle
 from plot import Plot
 from shapely.geometry import Polygon
 import sys
+import os
 
 #initialize timer
 init_time = time.time()
 
 #overrides the normal print
 #used for printing to the terminal
+'''
 def print(str, end='\n'):
 	sys.stdout.write(str + end)
 	sys.stdout.flush()
+'''
 
 #######################
 #	USER INPUT
@@ -228,6 +231,10 @@ if __name__=='__main__':
 	p_str = "\nParticles not within the right sieve size:\t" + str(wrong_size) + "\n\n"
 	file.write(p_str)
 	file.close()
+
+	if debug:
+		pathname = os.path.dirname(sys.argv[0])
+		print("Results saved to:\n" + os.path.abspath(pathname) + "\n")
 
 	#plot results
 	print("PLOTTING RESULTS...\n")
