@@ -171,7 +171,7 @@ if __name__=='__main__':
 	if debug:
 		print("\nGenerating the particles took " + str(exec_time) + " seconds\n")
 
-	#write particles to file
+	#write particles to readable file
 	print("WRITING TO FILE...\n")
 	file = open("values.txt", "w")
 	for p in particles:
@@ -199,6 +199,23 @@ if __name__=='__main__':
 			if write_labels:
 				p_str += "\t*** Longest distance from center to vertex ***\n"
 			p_str += "\t" + str(p.get_longest_distance()) + "\n"
+		file.write(p_str)
+	file.close()
+
+	#write particle centers to file
+	file = open("centers.txt", "w")
+	for i in range(len(particles)):
+		p_str = str(particles[i].get_position()[0]) + "," + str(particles[i].get_position()[1]) + "\n"
+		file.write(p_str)
+	file.close()
+
+	#write particle vertices to file
+	file = open("vertices.txt", "w")
+	for i in range(len(particles)):
+		p_str = ""
+		for j in range(len(particles[i].get_vertices())):
+			p_str += str(particles[i].get_vertices()[j][0]) + "," + str(particles[i].get_vertices()[j][1]) + "\n"
+		p_str += "\n"
 		file.write(p_str)
 	file.close()
 
