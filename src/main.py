@@ -26,7 +26,15 @@ if __name__=='__main__':
 	# elements take the shape: [sieve size, passing %],
 	# sieve size given in millimeters
 	# passing % given as fraction
-	gradation = [[50, 1.00], [30, 0.50], [10, 0.20], [5, 0.00]]
+
+	# test gradation
+	#gradation = [[50, 1.00], [30, 0.50], [10, 0.20], [5, 0.00]]
+
+	# full real gradation
+	#gradation = [[19, 1.00], [12.5, 0.987], [9.5, 0.865], [4.75, 0.718], [2.36, 0.514], [1.18, 0.361], [0.6, 0.255], [0.3, 0.147], [0.15, 0.077], [0.075, 0.054]]
+
+	# simplified real gradation
+	gradation = [[19, 1.00], [12.5, 0.987], [9.5, 0.865], [4.75, 0.718], [2.36, 0.514]]
 
 	# specimen boundaries
 	# given as millimeters
@@ -36,7 +44,7 @@ if __name__=='__main__':
 	boundaries = (x1, y1, x2, y2)
 
 	# amount of specimen area that is filled with particles, given as fraction
-	aggregate_fraction = 0.50
+	aggregate_fraction = 0.40
 
 	# minimum and maximum radius when generating vertices for the particles using polar coordinates
 	min_radius = 1
@@ -52,7 +60,7 @@ if __name__=='__main__':
 	retry = True
 
 	# number of permitted tries to find a placement for a new particle before deeming the generation unsuccessful
-	allowed_amount_of_fails = 1000
+	allowed_amount_of_fails = 10000
 
 	# should the result be displayed and saved as a plot
 	show_result = False

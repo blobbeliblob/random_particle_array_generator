@@ -17,6 +17,10 @@ class Generator():
 		#######################
 		#	MAIN PROGRAM
 		#######################
+		#normalize the gradation to make the sum of sieve percentages add up to 100 %
+		diff = 1.00 - gradation[len(gradation)-1][1]
+		for fraction in gradation:
+			fraction[1] = fraction[1] / diff
 		#convert the gradation to be a list of percentage retained
 		temp_var_a = 0
 		for i in range(len(gradation)):
