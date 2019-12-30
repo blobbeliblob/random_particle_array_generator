@@ -1,11 +1,8 @@
 
-# ignore the chache
+# ignore the cache
 src/__pycache__/
 
 # ignore the local output
-src/results/statistics.txt
-src/results/values.txt
-src/results/particles.png
+src/results/
+
 src/TODO.txt
-src/results/centers.txt
-src/results/vertices.txt

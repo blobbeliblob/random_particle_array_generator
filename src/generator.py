@@ -140,7 +140,7 @@ class Generator():
 				self.particles.append(particle)
 				area_to_be_filled -= area	#subtract the area of the placed particle from the area that needs to be filled
 				if self.debug:
-					print('Size: ' + str(self.gradation[i][0]) + 'mm\tProgress:' + "{:0.2f}".format(int(self.to_be_filled[len(self.gradation)-2-i][1]-self.left_unfilled[len(self.gradation)-2-i][1]) / int(self.to_be_filled[len(self.gradation)-2-i][1]) * 100) + " %" + '\tParticles: ' + str(self.number_of_particles[len(self.gradation)-2-i][1]), end='\r')
+					print('Size: ' + str(self.gradation[i][0]) + ' mm\tProgress:' + "{:0.2f}".format(int(self.to_be_filled[len(self.gradation)-2-i][1]-self.left_unfilled[len(self.gradation)-2-i][1]) / int(self.to_be_filled[len(self.gradation)-2-i][1]) * 100) + " %" + '\tParticles: ' + str(self.number_of_particles[len(self.gradation)-2-i][1]), end='\r')
 				#used in statistics
 				self.left_unfilled[len(self.gradation)-2-i][1] -= area
 				self.number_of_particles[len(self.gradation)-2-i][1] += 1
@@ -152,7 +152,7 @@ class Generator():
 				particle.scale(particle_size)
 				area = particle.get_area()
 			if self.debug:
-				print('Size: ' + str(self.gradation[i][0]) + 'mm\tProgress:' + "{:0.2f}".format(int(self.to_be_filled[len(self.gradation)-2-i][1]-self.left_unfilled[len(self.gradation)-2-i][1]) / int(self.to_be_filled[len(self.gradation)-2-i][1]) * 100) + " %" + '\tParticles: ' + str(self.number_of_particles[len(self.gradation)-2-i][1]))
+				print('Size: ' + str(self.gradation[i][0]) + ' mm\tProgress:' + "{:0.2f}".format(int(self.to_be_filled[len(self.gradation)-2-i][1]-self.left_unfilled[len(self.gradation)-2-i][1]) / int(self.to_be_filled[len(self.gradation)-2-i][1]) * 100) + " %" + '\tParticles: ' + str(self.number_of_particles[len(self.gradation)-2-i][1]))
 		#time it took to execute the generation of the particles
 		self.exec_time = time.time() - init_time
 		if self.debug:
