@@ -7,3 +7,5 @@ Written as part of my bachelor's thesis on the topic "Development of simple open
 Instructions and code are provided in the /src folder.
 
 Feel free to email any questions to blobbeliblob@gmail.com
+
+![sample image](sample.png)
