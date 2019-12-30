@@ -1,0 +1,46 @@
+# this file contains the settings used when generating the specimen
+# whitespace is ignored when the file is read
+# the '#' character can be used for comments
+# empty rows are ignored
+# the '=' character is used as delimiter
+# dots should be used for decimals, not commas!
+# the parameter (left of the '=' character) is given the value to the right of the '=' character
+
+# specimen boundaries
+
+x1 = 0
+y1 = 0
+x2 = 300
+y2 = 300
+
+# aggregate fraction
+# given as a percentage 100 > x > 0
+
+aggregate_fraction = 40
+
+# constraints for the generation of the particle shapes
+# min_radius and max_radius are the minimum and maximum radius when generating vertices for the particles using polar coordinates
+# v_num is the number of vertices in the generated particles, leave as None for randomized
+
+min_radius = 1
+max_radius = 1.25
+v_num = None
+
+# if the generation of a specimen is unsuccessful, shall the program keep trying
+# can be either 1 (True) or 0 (False)
+
+retry = 1
+
+# number of permitted tries to find a placement for a new particle before deeming the generation unsuccessful
+
+allowed_amount_of_fails = 10000
+
+# should the result be displayed and saved as a plot
+# can be either 1 (True) or 0 (False)
+
+show_result = 0
+save_plotted_result = 1
+
+# the dpi / detail level of the plotted result
+
+resolution = 1000
